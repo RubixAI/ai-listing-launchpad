@@ -1,10 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Home, Sparkles, ShieldCheck, Phone } from "lucide-react";
-
+import { Helmet } from "react-helmet-async";
 const Index = () => {
+  const canonicalUrl = typeof window !== "undefined" ? window.location.href : "https://example.com/";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "AI Realtor",
+    url: typeof window !== "undefined" ? window.location.origin : "https://example.com",
+    description: "AI Realtor landing page built from Figma kit with shadcn UI and Tailwind."
+  };
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <Helmet>
+        <title>AI Realtor — Real Estate Marketing</title>
+        <meta name="description" content="Launch an SEO‑ready real estate landing page built from Figma with shadcn UI." />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta name="robots" content="index,follow" />
+        <meta property="og:title" content="AI Realtor — Real Estate Marketing" />
+        <meta property="og:description" content="Launch an SEO‑ready real estate landing page built from Figma with shadcn UI." />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
+      <div className="min-h-screen bg-background text-foreground">
       <header>
         <nav className="container flex h-16 items-center justify-between">
           <a href="#" aria-label="AI Realtor home" className="flex items-center gap-2">
@@ -131,6 +150,7 @@ const Index = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 
